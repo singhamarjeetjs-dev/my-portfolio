@@ -5,8 +5,7 @@ export default function DarkModeToggle() {
     try {
       const saved = localStorage.getItem('theme')
       if (saved) return saved === 'dark'
-      // fallback to system preference
-      return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+      return typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
     } catch {
       return false
     }
@@ -27,7 +26,8 @@ export default function DarkModeToggle() {
     <button
       aria-label="Toggle dark mode"
       onClick={() => setIsDark((s) => !s)}
-      className="px-3 py-2 rounded-md border text-sm"
+      className="px-3 py-2 rounded-md border text-sm bg-white dark:bg-slate-800"
+      style={{ borderColor: '#e6eef8' }}
     >
       {isDark ? 'Light' : 'Dark'}
     </button>

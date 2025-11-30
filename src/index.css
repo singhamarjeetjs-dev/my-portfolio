@@ -1,16 +1,57 @@
 @import "tailwindcss";
 
-/* Theme tokens (optional) — keep these as CSS variables if you like */
-:root{
-  --brand: #0f172a; /* slate-900 */
-  --accent: #06b6d4; /* cyan-400 */
+/* Smooth scroll and base sizing */
+html { font-size: 18px; scroll-behavior: smooth; }
+
+/* Strong page defaults for light mode */
+:root {
+  /* use explicit colors for clarity */
+  --page-bg: #ffffff;
+  --page-text: #0f172a; /* slate-900 (strong) */
 }
 
-/* simple utility for smooth color transitions */
-* { transition: color .12s ease, background-color .12s ease; }
-
-/* dark theme toggles (Tailwind's dark mode uses the 'class' strategy by default) */
-html.dark {
-  color-scheme: dark;
+/* Page reset and strong default text color for light mode */
+body {
+  margin: 0;
+  font-family: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--page-bg);
+  color: var(--page-text);
 }
 
+/* Dark-mode fallback (explicit) */
+html.dark body {
+  background-color: #071127;
+  color: #e6eef8;
+}
+
+/* site-wrapper: keep padding on mobile; remove padding on large screens */
+.site-wrapper {
+  width: 100%;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+@media (min-width: 1024px) {
+  .site-wrapper { padding-left: 0; padding-right: 0; }
+}
+
+/* content container */
+.content-inner {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+/* Headline helpers */
+.h1 { font-size: 2.5rem; font-weight: 700; line-height: 1.05; }
+.h1-lg { font-size: 3rem; }
+.h2 { font-size: 1.25rem; font-weight: 600; }
+
+/* modest transitions */
+* { transition: background-color .12s ease, color .12s ease, border-color .12s ease; }
+
+/* Make sure anchors inside header are clearly visible in light mode */
+.header-link-light { color: #0f172a; }
