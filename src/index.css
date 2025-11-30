@@ -1,0 +1,16 @@
+@import "tailwindcss";
+
+/* Theme tokens (optional) — keep these as CSS variables if you like */
+:root{
+  --brand: #0f172a; /* slate-900 */
+  --accent: #06b6d4; /* cyan-400 */
+}
+
+/* simple utility for smooth color transitions */
+* { transition: color .12s ease, background-color .12s ease; }
+
+/* dark theme toggles (Tailwind's dark mode uses the 'class' strategy by default) */
+html.dark {
+  color-scheme: dark;
+}
+
