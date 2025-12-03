@@ -83,26 +83,64 @@ function Header(){
 
 function Hero(){
   return (
-    <section className="hero section center-rail" aria-labelledby="hero-heading">
+    <section
+      className="hero section center-rail"
+      aria-labelledby="hero-heading"
+    >
       <div>
-        <h1 id="hero-heading" className="hero-title">Hello, I'm Amarjeet — a Frontend Developer</h1>
-        <p className="hero-lead">I build responsive, accessible, and maintainable web applications using React, TypeScript and modern tooling. I focus on clarity, performance and dependable UX.</p>
+        <h1 id="hero-heading" className="hero-title">
+          Hello, I'm Amarjeet — a Frontend Developer
+        </h1>
+        <p className="hero-lead">
+          I build responsive, accessible, and maintainable web applications
+          using React, TypeScript and modern tooling. I focus on clarity,
+          performance and dependable UX.
+        </p>
         <div className="actions">
-          <a className="btn btn-primary" href="#projects">View projects</a>
-          <a className="btn btn-secondary" href="#contact">Get in touch</a>
+          <a className="btn btn-primary" href="#projects">
+            View projects
+          </a>
+          <a className="btn btn-secondary" href="#contact">
+            Get in touch
+          </a>
         </div>
       </div>
 
-      <div style={{display:'flex', justifyContent:'center', alignItems:'center'}}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
         <div className="portrait" role="img" aria-label="Portrait placeholder">
-          <div style={{textAlign:'center'}}>
-            <div style={{fontSize: '0.9rem', color: 'var(--muted)'}}>Portrait</div>
-            <div style={{marginTop: '8px', fontSize: '1.1rem', fontWeight: 700, color: 'var(--text)'}}>Amarjeet Singh</div>
+          <img
+            src="/portrait.jpg" // your real image
+            alt="Amarjeet Singh"
+            onError={(e) => {
+              const container = e.currentTarget.parentElement;
+              if (container) {
+                container.innerHTML = `
+          <div style="text-align:center;">
+            <div style="font-size: 0.9rem; color: var(--muted);">Portrait</div>
+            <div style="margin-top: 8px; font-size: 1.1rem; font-weight: 700; color: var(--text);">
+              Amarjeet Singh
+            </div>
           </div>
+        `;
+              }
+            }}
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              borderRadius: "12px",
+            }}
+          />
         </div>
       </div>
     </section>
-  )
+  );
 }
 
 function About(){
@@ -114,12 +152,13 @@ function About(){
       <div className="grid grid-auto-fit" style={{marginTop: '1rem'}}>
         <div className="card">
           <h3>Experience</h3>
-          <p>Frontend developer in e-commerce, dashboards, and education tech. Hands-on with production delivery and performance tuning.</p>
+          <p>Experienced Software Engineer with over three years of expertise in React, Typescript, Node.js, PostgreSQL, and Redis. Skilled in
+ developing responsive user interfaces and implementing robust API integrations.</p>
         </div>
 
         <div className="card">
           <h3>Skills</h3>
-          <p>React, TypeScript, Redux, Node.js, CSS, PostgreSQL, Redis</p>
+          <p>React, TypeScript, Redux, Node.js, CSS, PostgreSQL, Redis, Rxjs</p>
         </div>
 
         <div className="card">
