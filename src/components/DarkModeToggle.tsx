@@ -3,8 +3,8 @@ import { useEffect, useState } from 'react'
 export default function DarkModeToggle() {
   const [isDark, setIsDark] = useState<boolean>(() => {
     try {
-      const saved = localStorage.getItem('theme')
-      if (saved) return saved === 'dark'
+      const s = localStorage.getItem('theme')
+      if (s) return s === 'dark'
       return typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
     } catch {
       return false
@@ -23,13 +23,17 @@ export default function DarkModeToggle() {
   }, [isDark])
 
   return (
-    <button
-      aria-label="Toggle dark mode"
-      onClick={() => setIsDark((s) => !s)}
-      className="px-3 py-2 rounded-md border text-sm bg-white dark:bg-slate-800"
-      style={{ borderColor: '#e6eef8' }}
-    >
-      {isDark ? 'Light' : 'Dark'}
-    </button>
+    <label className="toggle-switch" aria-label="Toggle dark mode" title={isDark ? 'Switch to light' : 'Switch to dark'}>
+      <input
+        type="checkbox"
+        checked={isDark}
+        onChange={() => setIsDark(s => !s)}
+        aria-checked={isDark}
+      />
+      <span className="switch" role="switch" aria-checked={isDark}>
+        <span className="knob" />
+      </span>
+      <span className="label" aria-hidden="true">{isDark ? 'Dark' : 'Light'}</span>
+    </label>
   )
 }
