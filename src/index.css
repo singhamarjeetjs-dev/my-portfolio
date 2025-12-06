@@ -239,4 +239,153 @@ html.dark .field { background: #071127; border: 1px solid rgba(255,255,255,0.06)
 .mt-1{margin-top:0.25rem}.mt-2{margin-top:0.5rem}.mt-3{margin-top:0.75rem}.mb-2{margin-bottom:0.5rem}
 p, li, label { color: var(--text); }
 
+/* ---------- Toast Notification ---------- */
+.toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: var(--card-bg);
+  color: var(--text);
+  padding: 0.85rem 1.25rem;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.12);
+  font-weight: 600;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: toastShow 0.35s ease forwards;
+  z-index: 1000;
+}
+
+@keyframes toastShow {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes toastHide {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
+/* -------------------- Blog / CaseStudy + Photo Frame styles -------------------- */
+
+/* Photo frame inside hero (keeps portrait responsive) */
+.photo-frame {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  max-width: 420px;
+  aspect-ratio: 1/1;
+  border-radius: 18px;
+  padding: 10px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.02));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 28px 60px rgba(2,6,23,0.08);
+  transition: transform .35s cubic-bezier(.2,.9,.2,1), box-shadow .35s ease;
+  overflow: hidden;
+  will-change: transform;
+}
+
+/* decorative inner frame */
+.photo-frame .frame {
+  width: 100%;
+  height: 100%;
+  border-radius: 14px;
+  overflow: hidden;
+  position: relative;
+  border: 6px solid rgba(255,255,255,0.06);
+  display: block;
+  background: linear-gradient(180deg,#f8fafc,#f1f5f9);
+}
+
+/* image */
+.photo-frame img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform .6s cubic-bezier(.2,.9,.2,1);
+  will-change: transform;
+}
+
+/* hover micro-interaction */
+.photo-frame:hover {
+  transform: translateY(-8px) scale(1.01);
+  box-shadow: 0 36px 80px rgba(2,6,23,0.12);
+}
+.photo-frame:hover img {
+  transform: scale(1.03);
+}
+
+/* fallback placeholder inside frame */
+.photo-frame .fallback {
+  width: 100%;
+  height: 100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  color: var(--muted);
+  padding: 1rem;
+}
+
+/* subtle parallax effect class that moves based on scroll (JS will set transform) */
+.photo-frame.parallax {
+  transform: translateY(0px);
+}
+
+/* -------------------- Modern Theme Toggle -------------------- */
+
+.theme-toggle {
+  width: 48px;
+  height: 26px;
+  border-radius: 40px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  padding: 2px;
+  cursor: pointer;
+  position: relative;
+  transition: background .25s ease, border-color .25s ease;
+}
+
+.theme-toggle:hover {
+  border-color: var(--text);
+}
+
+.theme-toggle-thumb {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--card-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  transition: transform .3s cubic-bezier(.4, .0, .2, 1);
+}
+
+/* Position for light mode (left) */
+html:not(.dark) .theme-toggle-thumb {
+  transform: translateX(0px);
+}
+
+/* Position for dark mode (right) */
+html.dark .theme-toggle-thumb {
+  transform: translateX(22px);
+}
+
+
 /* End */

@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import DarkModeToggle from './components/DarkModeToggle'
+import ContactForm from './components/ContactForm'
 
 type Project = {
   id: number
@@ -10,10 +11,10 @@ type Project = {
 }
 
 const projects: Project[] = [
-  { id: 1, title: 'Ask Bruce', desc: 'An AI-powered personal assistant that helps to address the customer queries.', tech: ['React','Typescript', 'Node.js', 'PostgreSQL', 'Python', 'Redis'], url: '#' },
+  { id: 1, title: 'Ask Bruce', desc: 'An AI-powered personal assistant that helps address customer queries.', tech: ['React','Typescript', 'Node.js', 'PostgreSQL', 'Python', 'Redis'], url: '#' },
   { id: 2, title: 'Call Copilot', desc: 'A tool to assist with call management and automation.', tech: ['React', 'Typescript', 'Node.js', 'PostgreSQL', 'Python', 'Redis'], url: '#' },
-  { id: 3, title: 'Genesys Intergration', desc: 'Integrated with Genesys platform for enhanced customer experience.', tech: ['React', 'Typescript'], url: '#' },
-  { id: 4, title: 'Personal Budget Tracker', desc: '', tech: ['React', 'Typescript', 'Firebase'], url: '#' }
+  { id: 3, title: 'Genesys Integration', desc: 'Integrated with the Genesys platform for enhanced customer experience.', tech: ['React', 'Typescript'], url: '#' },
+  { id: 4, title: 'Personal Budget Tracker', desc: 'A simple and intuitive tool to monitor and manage personal expenses.', tech: ['React', 'Typescript', 'Firebase'], url: '#' }
 ]
 
 const App: React.FC = () => {
@@ -35,13 +36,14 @@ const App: React.FC = () => {
 
 export default App
 
-function Header(){
+/* -------------------- Header -------------------- */
+function Header() {
   const [open, setOpen] = useState(false)
 
   return (
     <header className="header" role="banner">
       <div className="header-inner center-rail">
-        <div style={{display: 'flex', alignItems:'center', gap: '20px'}}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
           <div className="brand">Amarjeet Singh</div>
           <nav className="nav" aria-label="Primary">
             <a href="#about">About</a>
@@ -50,13 +52,11 @@ function Header(){
           </nav>
         </div>
 
-        <div style={{display: 'flex', alignItems: 'center', gap: '12px'}}>
-          {/* Toggle visible on desktop and mobile; on mobile it's placed before menu */}
-          <div style={{display: 'inline-flex', alignItems: 'center'}}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+          <div style={{ display: 'inline-flex', alignItems: 'center' }}>
             <DarkModeToggle />
           </div>
 
-          {/* Menu button for mobile */}
           <button
             className="menu-button"
             aria-expanded={open}
@@ -81,84 +81,91 @@ function Header(){
   )
 }
 
-function Hero(){
+/* -------------------- Hero -------------------- */
+function Hero() {
+  const frameRef = useRef<HTMLDivElement | null>(null)
+
+  // subtle parallax on scroll
+  useEffect(() => {
+    const el = frameRef.current
+    if (!el) return
+    let ticking = false
+    const onScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const rect = el.getBoundingClientRect()
+          const viewportHeight = window.innerHeight
+          const center = rect.top + rect.height / 2
+          const distanceFromCenter = center - viewportHeight / 2
+          const maxOffset = 18 // px maximum translate
+          const offset = Math.max(-maxOffset, Math.min(maxOffset, -distanceFromCenter * 0.02))
+          el.style.transform = `translateY(${offset}px)`
+          ticking = false
+        })
+        ticking = true
+      }
+    }
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    window.addEventListener('resize', onScroll)
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('resize', onScroll)
+    }
+  }, [])
+
   return (
-    <section
-      className="hero section center-rail"
-      aria-labelledby="hero-heading"
-    >
+    <section className="hero section center-rail" aria-labelledby="hero-heading">
       <div>
-        <h1 id="hero-heading" className="hero-title">
-          Hello, I'm Amarjeet — a Frontend Developer
-        </h1>
-        <p className="hero-lead">
-          I build responsive, accessible, and maintainable web applications
-          using React, TypeScript and modern tooling. I focus on clarity,
-          performance and dependable UX.
-        </p>
+        <div className="kicker">Frontend • React • TypeScript</div>
+        <h1 id="hero-heading" className="hero-title">Hello, I'm Amarjeet — I build fast, accessible web apps</h1>
+        <p className="hero-lead">I create pragmatic front-ends with clear UX, reliable performance and maintainable code. I help teams ship features that users actually enjoy using.</p>
         <div className="actions">
-          <a className="btn btn-primary" href="#projects">
-            View projects
-          </a>
-          <a className="btn btn-secondary" href="#contact">
-            Get in touch
-          </a>
+          <a className="btn btn-primary" href="#projects">View projects</a>
+          <a className="btn btn-secondary" href="#contact">Get in touch</a>
         </div>
       </div>
 
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <div className="portrait" role="img" aria-label="Portrait placeholder">
-          <img
-            src="/portrait.jpg" // your real image
-            alt="Amarjeet Singh"
-            onError={(e) => {
-              const container = e.currentTarget.parentElement;
-              if (container) {
-                container.innerHTML = `
-          <div style="text-align:center;">
-            <div style="font-size: 0.9rem; color: var(--muted);">Portrait</div>
-            <div style="margin-top: 8px; font-size: 1.1rem; font-weight: 700; color: var(--text);">
-              Amarjeet Singh
-            </div>
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <div className="photo-frame parallax" ref={frameRef} aria-hidden={false}>
+          <div className="frame">
+            <img
+              src="/portrait.jpg"
+              alt="Amarjeet Singh"
+              onError={(e) => {
+                const img = e.currentTarget
+                const parent = img.parentElement
+                if (parent) {
+                  parent.innerHTML = `<div class="fallback"><div style="font-size:0.95rem;color:var(--muted)">Portrait</div><div style="margin-top:8px;font-weight:700;color:var(--text)">Amarjeet Singh</div></div>`
+                }
+              }}
+              style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+            />
           </div>
-        `;
-              }
-            }}
-            style={{
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-              borderRadius: "12px",
-            }}
-          />
         </div>
       </div>
     </section>
-  );
+  )
 }
 
-function About(){
+/* -------------------- About -------------------- */
+function About() {
   return (
     <section id="about" className="section center-rail">
       <h2 className="section-title">About me</h2>
-      <p style={{color: 'var(--text)', maxWidth: 'var(--measure)'}}>I have 4+ years of experience building web applications — focusing on React, Redux, TypeScript and performance. I value readable code, accessible interfaces, and practical designs that stand the test of time.</p>
+      <p style={{ color: 'var(--text)', maxWidth: 'var(--measure)' }}>
+        I have 4+ years of experience building web applications — focusing on React, Redux, TypeScript and performance. I value readable code, accessible interfaces, and practical designs that stand the test of time.
+      </p>
 
-      <div className="grid grid-auto-fit" style={{marginTop: '1rem'}}>
+      <div className="grid grid-auto-fit" style={{ marginTop: '1rem' }}>
         <div className="card">
           <h3>Experience</h3>
-          <p>Experienced Software Engineer with over three years of expertise in React, Typescript, Node.js, PostgreSQL, and Redis. Skilled in
- developing responsive user interfaces and implementing robust API integrations.</p>
+          <p>Frontend developer in e-commerce, dashboards, and education tech. Hands-on with production delivery and performance tuning.</p>
         </div>
 
         <div className="card">
           <h3>Skills</h3>
-          <p>React, TypeScript, Redux, Node.js, CSS, PostgreSQL, Redis, Rxjs</p>
+          <p>React, TypeScript, Redux, Node.js, CSS, PostgreSQL, Redis</p>
         </div>
 
         <div className="card">
@@ -170,19 +177,20 @@ function About(){
   )
 }
 
-function Projects(){
+/* -------------------- Projects -------------------- */
+function Projects() {
   return (
     <section id="projects" className="section center-rail">
       <h2 className="section-title">Selected projects</h2>
-      <div className="grid grid-auto-fit grid-projects" style={{marginTop: '1rem'}}>
+      <div className="section-subtitle">A small selection of work — responsive and maintainable</div>
+      <div className="grid grid-auto-fit grid-projects" style={{ marginTop: '1rem' }}>
         {projects.map(p => (
-          <article key={p.id} className="card" style={{minHeight:'140px'}}>
+          <article key={p.id} className="card" style={{ minHeight: '140px' }}>
             <h3>{p.title}</h3>
-            <p style={{color:'var(--text)'}}>{p.desc}</p>
-            <div style={{marginTop:'12px'}}>
-              {p.tech.map(t => <span key={t} className="tag" style={{marginRight:8}}>{t}</span>)}
+            <p style={{ color: 'var(--text)' }}>{p.desc}</p>
+            <div style={{ marginTop: '12px', display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+              {p.tech.map(t => <span key={t} className="tag" style={{ marginRight: 8 }}>{t}</span>)}
             </div>
-            <div style={{marginTop:'12px'}}><a className="link" href={p.url}>View</a></div>
           </article>
         ))}
       </div>
@@ -190,49 +198,38 @@ function Projects(){
   )
 }
 
-function Contact(){
+/* -------------------- Contact -------------------- */
+function Contact() {
   return (
     <section id="contact" className="section center-rail">
       <div className="contact-grid">
         <div>
           <div className="contact-hero">Let’s build something meaningful together.</div>
           <p className="contact-copy">If you have a product idea, need frontend expertise, or want to improve an existing app’s performance — I’ll help ship it quickly with clean, maintainable code.</p>
-          <ul style={{color:'var(--text)'}}>
+          <ul style={{ color: 'var(--text)' }}>
             <li>• Fast, accessible React + TypeScript apps</li>
             <li>• Practical design + component systems</li>
             <li>• Performance and developer experience</li>
           </ul>
         </div>
 
-        <div style={{display:'flex', justifyContent:'center'}}>
-          <form className="form-card" onSubmit={(e) => { e.preventDefault(); alert('Message sent (demo)') }}>
-            <label style={{display:'block', marginBottom:6}}>Your name</label>
-            <input className="field" placeholder="Your name" />
-
-            <label style={{display:'block', marginTop:12, marginBottom:6}}>Your email</label>
-            <input className="field" placeholder="you@example.com" />
-
-            <label style={{display:'block', marginTop:12, marginBottom:6}}>Message</label>
-            <textarea className="field" rows={5} placeholder="Tell me about your project..." />
-
-            <div style={{marginTop:12}}>
-              <button className="form-submit" type="submit">Send message</button>
-            </div>
-          </form>
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
+          <ContactForm />
         </div>
       </div>
     </section>
   )
 }
 
-function Footer(){
+/* -------------------- Footer -------------------- */
+function Footer() {
   return (
     <footer className="footer" role="contentinfo">
-      <div style={{maxWidth: '1200px', margin: '0 auto', padding: '0 1rem', display:'flex', justifyContent:'space-between', alignItems:'center', gap: 12}}>
+      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 1rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 12 }}>
         <div>© {new Date().getFullYear()} Amarjeet Singh. All rights reserved.</div>
-        <div style={{display:'flex', gap:12}}>
-          <a href="#">GitHub</a>
-          <a href="#">LinkedIn</a>
+        <div style={{ display: 'flex', gap: 12 }}>
+          <a href="https://github.com/singhamarjeetjs-dev" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a href="https://linkedin.singhamarjeet.co.in/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
         </div>
       </div>
     </footer>
