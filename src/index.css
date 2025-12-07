@@ -121,7 +121,7 @@ html.dark .portrait { background: linear-gradient(180deg,#072137,#0f2a3a); color
 .grid-auto-fit { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
 
 /* card (professional redesign) */
-.card {
+.main-card {
   background: var(--card-bg);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
@@ -137,7 +137,7 @@ html.dark .portrait { background: linear-gradient(180deg,#072137,#0f2a3a); color
 }
 
 /* top accent stripe for cards */
-.card::before {
+.main-card::before {
   content: "";
   position: absolute;
   left: 0;
@@ -148,10 +148,10 @@ html.dark .portrait { background: linear-gradient(180deg,#072137,#0f2a3a); color
   opacity: 0.12;
   transition: opacity .18s ease, transform .18s ease;
 }
-html.dark .card::before { opacity: 0.14; }
+html.dark .main-card::before { opacity: 0.14; }
 
 /* card hover lift */
-.card:hover {
+.main-card:hover {
   transform: translateY(-8px);
   box-shadow: 0 22px 48px rgba(2,6,23,0.10);
   border-color: rgba(15,23,42,0.12);
@@ -159,8 +159,8 @@ html.dark .card::before { opacity: 0.14; }
 }
 
 /* card content */
-.card h3 { margin: 0 0 0.5rem 0; font-size: 1.05rem; font-weight: 800; color: var(--text); }
-.card p { margin: 0; color: var(--text); opacity: 0.95; }
+.main-card h3 { margin: 0 0 0.5rem 0; font-size: 1.05rem; font-weight: 800; color: var(--text); }
+.main-card p { margin: 0; color: var(--text); opacity: 0.95; }
 
 /* ---------- Skill tag (pill) improvements ---------- */
 .tag {
@@ -189,7 +189,7 @@ html.dark .tag {
 html.dark .tag--muted { background: rgba(255,255,255,0.02); color: var(--muted); }
 
 /* accent link inside card */
-.card .link { color: var(--accent); font-weight: 700; }
+.main-card .link { color: var(--accent); font-weight: 700; }
 
 /* ---------- Contact ---------- */
 .contact-grid { display: grid; gap: 1.5rem; align-items: start; }
@@ -219,15 +219,15 @@ html.dark .field { background: #071127; border: 1px solid rgba(255,255,255,0.06)
 }
 
 /* default apply for cards, stagger via nth-child on common grids */
-.grid-auto-fit > .card:nth-child(1)  { animation: fadeUp .42s ease var(--anim-fast) forwards; animation-delay: .06s; }
-.grid-auto-fit > .card:nth-child(2)  { animation: fadeUp .42s ease var(--anim-fast) forwards; animation-delay: .12s; }
-.grid-auto-fit > .card:nth-child(3)  { animation: fadeUp .42s ease var(--anim-fast) forwards; animation-delay: .18s; }
-.grid-auto-fit > .card:nth-child(4)  { animation: fadeUp .42s ease var(--anim-fast) forwards; animation-delay: .24s; }
-.grid-auto-fit > .card:nth-child(5)  { animation: fadeUp .42s ease var(--anim-fast) forwards; animation-delay: .30s; }
-.grid-auto-fit > .card:nth-child(6)  { animation: fadeUp .42s ease var(--anim-fast) forwards; animation-delay: .36s; }
-.grid-auto-fit > .card:nth-child(7)  { animation: fadeUp .42s ease var(--anim-fast) forwards; animation-delay: .42s; }
-.grid-auto-fit > .card:nth-child(8)  { animation: fadeUp .42s ease var(--anim-fast) forwards; animation-delay: .48s; }
-.grid-auto-fit > .card:nth-child(9)  { animation: fadeUp .42s ease var(--anim-fast) forwards; animation-delay: .54s; }
+.grid-auto-fit > .main-card:nth-child(1)  { animation: fadeUp .42s ease var(--anim-fast) forwards; animation-delay: .06s; }
+.grid-auto-fit > .main-card:nth-child(2)  { animation: fadeUp .42s ease var(--anim-fast) forwards; animation-delay: .12s; }
+.grid-auto-fit > .main-card:nth-child(3)  { animation: fadeUp .42s ease var(--anim-fast) forwards; animation-delay: .18s; }
+.grid-auto-fit > .main-card:nth-child(4)  { animation: fadeUp .42s ease var(--anim-fast) forwards; animation-delay: .24s; }
+.grid-auto-fit > .main-card:nth-child(5)  { animation: fadeUp .42s ease var(--anim-fast) forwards; animation-delay: .30s; }
+.grid-auto-fit > .main-card:nth-child(6)  { animation: fadeUp .42s ease var(--anim-fast) forwards; animation-delay: .36s; }
+.grid-auto-fit > .main-card:nth-child(7)  { animation: fadeUp .42s ease var(--anim-fast) forwards; animation-delay: .42s; }
+.grid-auto-fit > .main-card:nth-child(8)  { animation: fadeUp .42s ease var(--anim-fast) forwards; animation-delay: .48s; }
+.grid-auto-fit > .main-card:nth-child(9)  { animation: fadeUp .42s ease var(--anim-fast) forwards; animation-delay: .54s; }
 
 /* ensure other elements fade in gently */
 .hero, .section-title, .portrait { opacity: 0; transform: translateY(6px); animation: fadeUp .48s ease var(--anim-fast) forwards; }

@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react'
 import DarkModeToggle from './components/DarkModeToggle'
 import ContactForm from './components/ContactForm'
+import TechTiles from './components/Learn/TechTiles'
+import TechModal from './components/Learn/TechModal'
 
 type Project = {
   id: number
@@ -18,6 +20,21 @@ const projects: Project[] = [
 ]
 
 const App: React.FC = () => {
+  // Learn modal state (modal-first pattern)
+  const [techOpen, setTechOpen] = useState(false)
+  const [selectedTech, setSelectedTech] = useState<string | undefined>(undefined)
+
+  const openTechModal = (techId: string) => {
+    setSelectedTech(techId)
+    setTechOpen(true)
+  }
+
+  const closeTechModal = () => {
+    setTechOpen(false)
+    // keep selectedTech for a moment or clear immediately if you prefer
+    // setSelectedTech(undefined)
+  }
+
   return (
     <div className="site-wrapper">
       <div className="content-inner">
@@ -26,6 +43,10 @@ const App: React.FC = () => {
           <Hero />
           <About />
           <Projects />
+          {/* Tech overview tiles - clicking opens the modal */}
+          <TechTiles onOpenTech={openTechModal} />
+          {/* Modal controller (loads topics -> demos inside) */}
+          <TechModal open={techOpen} onClose={closeTechModal} techId={selectedTech} />
           <Contact />
         </main>
         <Footer />
@@ -48,6 +69,7 @@ function Header() {
           <nav className="nav" aria-label="Primary">
             <a href="#about">About</a>
             <a href="#projects">Projects</a>
+            <a href="#learn">Learn</a>
             <a href="#contact">Contact</a>
           </nav>
         </div>
@@ -74,6 +96,7 @@ function Header() {
         <div className="mobile-menu-inner center-rail">
           <a href="#about" onClick={() => setOpen(false)}>About</a>
           <a href="#projects" onClick={() => setOpen(false)}>Projects</a>
+          <a href="#learn" onClick={() => setOpen(false)}>Learn</a>
           <a href="#contact" onClick={() => setOpen(false)}>Contact</a>
         </div>
       </div>
@@ -158,17 +181,17 @@ function About() {
       </p>
 
       <div className="grid grid-auto-fit" style={{ marginTop: '1rem' }}>
-        <div className="card">
+        <div className="main-card">
           <h3>Experience</h3>
           <p>Frontend developer in e-commerce, dashboards, and education tech. Hands-on with production delivery and performance tuning.</p>
         </div>
 
-        <div className="card">
+        <div className="main-card">
           <h3>Skills</h3>
           <p>React, TypeScript, Redux, Node.js, CSS, PostgreSQL, Redis</p>
         </div>
 
-        <div className="card">
+        <div className="main-card">
           <h3>Approach</h3>
           <p>Readable code, accessible interfaces, and practical designs. I prefer pragmatic, testable solutions that scale.</p>
         </div>
@@ -185,7 +208,7 @@ function Projects() {
       <div className="section-subtitle">A small selection of work — responsive and maintainable</div>
       <div className="grid grid-auto-fit grid-projects" style={{ marginTop: '1rem' }}>
         {projects.map(p => (
-          <article key={p.id} className="card" style={{ minHeight: '140px' }}>
+          <article key={p.id} className="main-card" style={{ minHeight: '140px' }}>
             <h3>{p.title}</h3>
             <p style={{ color: 'var(--text)' }}>{p.desc}</p>
             <div style={{ marginTop: '12px', display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
