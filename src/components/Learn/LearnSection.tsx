@@ -3,8 +3,8 @@ import { useState, Suspense, lazy, type JSX } from 'react'
 import LearnModal from './LearnModal'
 
 // lazy-load demos
-const ClosureDemo = lazy(() => import('./ClosureDemo'))
-const AsyncDemo = lazy(() => import('./AsyncDemo'))
+const ClosureDemo = lazy(() => import('./Javascript/ClosureDemo'))
+const AsyncDemo = lazy(() => import('./Javascript/AsyncDemo'))
 
 export default function LearnSection(): JSX.Element {
   const [open, setOpen] = useState(false)
