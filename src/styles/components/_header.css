@@ -1,0 +1,25 @@
+/* ---------- Header ---------- */
+.header { width: 100%; border-bottom: 1px solid var(--border); background: var(--bg); position: sticky; top: 0; z-index: 40; }
+.header-inner { display: flex; align-items: center; justify-content: space-between; height: 80px; gap: 20px; }
+.brand { font-weight: 800; font-size: 1.25rem; color: var(--text); letter-spacing: -0.02em; }
+.nav { display: none; gap: 28px; align-items: center; }
+.nav a { color: var(--text); font-weight: 600; font-size: 0.98rem; padding: 6px 4px; border-radius: 6px; }
+.nav a:hover { color: var(--accent); transform: translateY(-1px); }
+
+/* nav visible on desktop */
+@media (min-width: 1024px){ .nav { display: flex; } .menu-button { display: none; } }
+.menu-button { border-radius: 8px; border: 1px solid var(--border); padding: 6px 8px; background: var(--bg); color: var(--text); transition: transform var(--anim-fast) ease, box-shadow var(--anim-fast) ease; }
+.menu-button:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(2,6,23,0.06); }
+
+/* mobile menu */
+.mobile-menu { overflow: hidden; transition: max-height .22s ease; border-top: 1px solid var(--border); }
+.mobile-menu-inner { padding: 12px; display: flex; flex-direction: column; gap: 8px; }
+
+/* ---------- Toggle switch ---------- */
+.toggle-switch { --w: 48px; --h: 28px; display: inline-flex; align-items: center; gap: 8px; cursor: pointer; }
+.toggle-switch .switch { width: var(--w); height: var(--h); background: linear-gradient(180deg, rgba(15,23,42,0.06), rgba(15,23,42,0.02)); border-radius: calc(var(--h)/2); position: relative; border: 1px solid var(--border); transition: background .18s ease, border-color .18s ease; }
+.toggle-switch .knob { position: absolute; top: 3px; left: 3px; width: calc(var(--h) - 6px); height: calc(var(--h) - 6px); border-radius: 50%; background: white; box-shadow: 0 6px 14px rgba(2,6,23,0.10); transition: transform .18s ease, background .18s ease; }
+.toggle-switch input { position: absolute; opacity: 0; pointer-events: none; }
+.toggle-switch input:checked + .switch { background: linear-gradient(90deg, var(--card-accent-2), var(--card-accent)); border-color: rgba(0,0,0,0.06); }
+.toggle-switch input:checked + .switch .knob { transform: translateX(calc(var(--w) - var(--h))); background: white; }
+.toggle-switch .label { font-size: 0.9rem; color: var(--muted); }

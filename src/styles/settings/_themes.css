@@ -1,0 +1,54 @@
+html.dark {
+  --bg: #071127;
+  --text: #e5e7eb;
+  --text-muted: #cbd5e1;
+  --card-bg: #071127;
+  --border: rgba(255,255,255,0.04);
+  --btn-bg: #0f172a;
+  --btn-text: #ffffff;
+
+  --card-accent: #38bdf8;
+  --card-accent-2: #06b6d4;
+}
+
+/* -------------------- Modern Theme Toggle -------------------- */
+
+.theme-toggle {
+  width: 48px;
+  height: 26px;
+  border-radius: 40px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  padding: 2px;
+  cursor: pointer;
+  position: relative;
+  transition: background .25s ease, border-color .25s ease;
+}
+
+.theme-toggle:hover {
+  border-color: var(--text);
+}
+
+.theme-toggle-thumb {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--card-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  transition: transform .3s cubic-bezier(.4, .0, .2, 1);
+}
+
+/* Position for light mode (left) */
+html:not(.dark) .theme-toggle-thumb {
+  transform: translateX(0px);
+}
+
+/* Position for dark mode (right) */
+html.dark .theme-toggle-thumb {
+  transform: translateX(22px);
+}

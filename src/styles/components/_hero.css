@@ -1,0 +1,180 @@
+.hero-split {
+  position: relative;
+  min-height: calc(100vh - 80px);
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* ------------------------------------- */
+/* Background split (left / right)        */
+/* ------------------------------------- */
+.hero-split-bg {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  z-index: 0;
+}
+
+.hero-bg-left {
+  flex: 1;
+  background: var(--bg);
+}
+
+.hero-bg-right {
+  flex: 1;
+  background: linear-gradient(
+    120deg,
+    var(--bg) 0%,
+    rgba(56, 189, 248, 0.12) 100%
+  );
+  animation: heroBackgroundDrift 18s ease-in-out infinite;
+}
+
+@keyframes heroBackgroundDrift {
+  0% { filter: brightness(1); }
+  50% { filter: brightness(1.05); }
+  100% { filter: brightness(1); }
+}
+
+/* ------------------------------------- */
+/* Content wrapper                        */
+/* ------------------------------------- */
+.hero-split-content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+/* Max readable width for text */
+.hero-full-content {
+  max-width: 1200px;
+}
+
+/* ------------------------------------- */
+/* Text block                             */
+/* ------------------------------------- */
+.hero-left {
+  max-width: 1100px;
+}
+
+/* Eyebrow / role */
+.hero-eyebrow {
+  display: inline-block;
+  font-size: 0.85rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+/* ------------------------------------- */
+/* Headline                               */
+/* ------------------------------------- */
+.hero-heading {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25em;
+  font-size: clamp(3rem, 5vw, 4.2rem);
+  font-weight: 800;
+  line-height: 1.1;
+  color: var(--text);
+  margin-bottom: 1.6rem;
+  overflow: hidden;
+}
+
+/* Accent words */
+.hero-heading .accent {
+  color: var(--accent);
+  font-weight: 800;
+}
+
+/* Scroll reveal lines */
+.reveal-line {
+  display: inline-block;
+  transform: translateY(120%);
+  opacity: 0;
+  transition:
+    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.6s ease;
+}
+
+/* Activate reveal */
+.hero-visible .reveal-line {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* Stagger */
+.hero-visible .reveal-line:nth-child(1) { transition-delay: 0.05s; }
+.hero-visible .reveal-line:nth-child(2) { transition-delay: 0.18s; }
+.hero-visible .reveal-line:nth-child(3) { transition-delay: 0.32s; }
+
+/* ------------------------------------- */
+/* Supporting paragraph                   */
+/* ------------------------------------- */
+.hero-description {
+  max-width: 720px;
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: var(--text);
+  opacity: 0.9;
+}
+
+/* ------------------------------------- */
+/* Actions                                */
+/* ------------------------------------- */
+.hero-actions {
+  margin-top: 2.4rem;
+  display: flex;
+  gap: 1rem;
+}
+
+/* ------------------------------------- */
+/* Parallax support (JS applies transform)*/
+/* ------------------------------------- */
+.hero-left {
+  will-change: transform;
+}
+
+/* ------------------------------------- */
+/* Dark / Light clarity helpers           */
+/* ------------------------------------- */
+[data-theme="dark"] .hero-heading,
+[data-theme="dark"] .hero-description {
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="light"] .hero-heading {
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.08);
+}
+
+/* ------------------------------------- */
+/* Reduced motion accessibility           */
+/* ------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .reveal-line {
+    transform: none !important;
+    opacity: 1 !important;
+    transition: none !important;
+  }
+
+  .hero-bg-right {
+    animation: none !important;
+  }
+}
+
+/* ------------------------------------- */
+/* Responsive                             */
+/* ------------------------------------- */
+@media (max-width: 768px) {
+  .hero-heading {
+    font-size: clamp(2.4rem, 8vw, 3.2rem);
+  }
+
+  .hero-actions {
+    align-items: flex-start;
+  }
+}

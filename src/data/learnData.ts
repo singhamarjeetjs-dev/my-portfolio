@@ -60,15 +60,15 @@ export const TECHS: Tech[] = [
         difficulty: 'Medium',
         icon: 'memory'
       },
-      // {
-      //   id: 'js-prototypes',
-      //   title: 'Prototypes & inheritance',
-      //   description: 'Prototype chain, Object.create and classical vs prototypal inheritance.',
-      //   loader: () => import('../components/Learn/PrototypesDemo'),
-      //   tags: ['prototype', 'inheritance'],
-      //   difficulty: 'Medium',
-      //   icon: 'bug'
-      // },
+      {
+        id: 'js-fundamentals',
+        title: 'JS fundamentals: Basics',
+        description: 'var/let/const, hoisting, scope, prototype chain and property lookup.',
+        loader: () => import('../components/Learn/Javascript/JSFundamentalsDemo'),
+        tags: ['fundamentals', 'scope', 'prototype'],
+        difficulty: 'Medium',
+        icon: 'bug'
+      },
       // {
       //   id: 'js-hoisting',
       //   title: 'Hoisting & scoping',

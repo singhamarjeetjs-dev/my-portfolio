@@ -1,0 +1,22 @@
+.theme-toggle {
+  width: 48px;
+  height: 26px;
+  border-radius: 40px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  padding: 2px;
+  cursor: pointer;
+}
+
+.theme-toggle-thumb {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  transition: transform .3s cubic-bezier(.4,0,.2,1);
+}
+
+html.dark .theme-toggle-thumb {
+  transform: translateX(22px);
+}

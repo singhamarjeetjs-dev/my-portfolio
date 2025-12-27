@@ -1,0 +1,29 @@
+/* ---------- Layout helpers (FLUID preserved) ---------- */
+.site-wrapper { width: 100%; margin: 0; }
+.content-inner { width: 100%; margin-left: auto; margin-right: auto; padding-left: 0; padding-right: 0; max-width: none; }
+.center-rail { margin-left: auto; margin-right: auto; width: 100%; padding-left: 0.5rem; padding-right: 0.5rem; max-width: calc(100% - (var(--gutter) * 2)); }
+
+/* ---------- New layout primitives (Ram-style) ---------- */
+
+/* Full-width section wrapper */
+.section {
+  width: 100%;
+}
+
+/* Constrained content for layouts */
+.content {
+  width: 100%;
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+/* Narrow content for readable text */
+.content-narrow {
+  max-width: 760px;
+}
+
+/* Utility */
+.full-width {
+  width: 100%;
+}
