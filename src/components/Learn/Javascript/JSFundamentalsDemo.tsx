@@ -81,7 +81,6 @@ export default function JSFundamentalsDemo(): JSX.Element {
         // eslint-disable-next-line no-constant-condition
         if (true) {
           // eslint-disable-next-line no-var, @typescript-eslint/no-unused-vars
-          var aInner = 2
         }
         return a
       }
@@ -89,7 +88,6 @@ export default function JSFundamentalsDemo(): JSX.Element {
         const b = 1
         {
           // eslint-disable-next-line @typescript-eslint/no-unused-vars
-          const bInner = 2
         }
         return b
       }
