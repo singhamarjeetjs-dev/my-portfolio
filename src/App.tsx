@@ -71,7 +71,7 @@ function Header() {
           <nav className="nav" aria-label="Primary">
             <a href="#about">About</a>
             <a href="#projects">Projects</a>
-            <a href="#learn">Learn</a>
+            {/* <a href="#learn">Learn</a> */}
             <a href="#contact">Contact</a>
           </nav>
         </div>
