@@ -1,0 +1,149 @@
+/* ============================= */
+/* PROJECTS — EDITORIAL STYLE   */
+/* ============================= */
+
+.projects {
+  background: var(--bg);
+}
+
+/* Intro text */
+.projects-intro {
+  max-width: 720px;
+  margin-bottom: 3rem;
+  font-size: 1.05rem;
+  color: var(--text-muted);
+}
+
+/* Project list */
+.projects-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+/* Each project row */
+.project-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 2rem;
+  padding-bottom: 2.5rem;
+  border-bottom: 1px solid var(--border);
+  transition: transform 0.3s ease;
+}
+
+.project-row:hover {
+  transform: translateY(-4px);
+}
+
+/* Main content */
+.project-main {
+  max-width: 720px;
+}
+
+.project-title {
+  font-size: 1.6rem;
+  font-weight: 900;
+  margin-bottom: 0.5rem;
+  color: var(--text);
+}
+
+.project-desc {
+  font-size: 1rem;
+  line-height: 1.7;
+  margin-bottom: 0.75rem;
+  color: var(--text);
+  opacity: 0.9;
+}
+
+.project-tech {
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+/* Confidential note */
+.project-note {
+  margin-top: 0.6rem;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* Actions */
+.project-action {
+  display: flex;
+  align-items: flex-start;
+}
+
+.project-link {
+  font-weight: 700;
+  color: var(--accent);
+  text-decoration: none;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.project-link:hover {
+  transform: translateX(4px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .project-row {
+    flex-direction: column;
+  }
+
+  .project-action {
+    margin-top: 0.5rem;
+  }
+}
+
+/* ============================= */
+/* CASE STUDY EXPAND VIEW        */
+/* ============================= */
+
+.project-toggle {
+  margin-top: 0.75rem;
+  background: none;
+  border: none;
+  padding: 0;
+  font-weight: 700;
+  color: var(--accent);
+  cursor: pointer;
+}
+
+.project-toggle:hover {
+  text-decoration: underline;
+}
+
+.case-study {
+  margin-top: 1.5rem;
+  padding-left: 1rem;
+  border-left: 2px solid var(--border);
+  display: grid;
+  gap: 1.2rem;
+  animation: fadeUp 0.3s ease;
+}
+
+.case-study strong {
+  display: block;
+  margin-bottom: 0.3rem;
+  font-weight: 800;
+  color: var(--text);
+}
+
+.case-study p,
+.case-study li {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--text);
+  opacity: 0.9;
+}
+
+.case-study ul {
+  margin: 0;
+  padding-left: 0;
+  list-style: none;
+}
+

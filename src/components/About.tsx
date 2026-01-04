@@ -26,7 +26,7 @@ export default function About() {
     <section ref={sectionRef} id="about" className="section about">
       {/* Narrative — narrow & readable */}
       <div className="content">
-        <h2 className="section-title">About</h2>
+        <h2 className="section-title">ABOUT ME</h2>
 
         <div className="about-narrative">
           <p className="about-intro">

@@ -25,6 +25,7 @@
 @import './components/_toast.css';
 @import './components/_actions.css';
 @import './components/_button.css';
+@import './components/_projects.css';
 
 /* Utilities */
 @import './utilities/_utilities.css';
