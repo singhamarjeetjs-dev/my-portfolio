@@ -136,9 +136,9 @@ function Contact() {
           <div className="contact-hero">Let’s build something meaningful together.</div>
           <p className="contact-copy">If you have a product idea, need frontend expertise, or want to improve an existing app’s performance — I’ll help ship it quickly with clean, maintainable code.</p>
           <ul style={{ color: 'var(--text)' }}>
-            <li>• Fast, accessible React + TypeScript apps</li>
-            <li>• Practical design + component systems</li>
-            <li>• Performance and developer experience</li>
+            <li>Fast, accessible React + TypeScript apps</li>
+            <li>Practical design + component systems</li>
+            <li>Performance and developer experience</li>
           </ul>
         </div>
 

@@ -5,18 +5,6 @@ export default function Hero() {
   const heroRef = useRef<HTMLElement | null>(null)
 
   useEffect(() => {
-    const onScroll = () => {
-      const y = window.scrollY
-      if (textRef.current) {
-        textRef.current.style.transform = `translateY(${y * 0.12}px)`
-      }
-    }
-
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
-
-  useEffect(() => {
     const el = heroRef.current
     if (!el) return
 
@@ -35,10 +23,6 @@ export default function Hero() {
 
   return (
     <section ref={heroRef} className="hero-split hero-full">
-      <div className="hero-split-bg">
-        <div className="hero-bg-left" />
-        <div className="hero-bg-right" />
-      </div>
 
       <div className="content hero-split-content hero-full-content">
         <div className="hero-left" ref={textRef}>
